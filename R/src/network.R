@@ -37,10 +37,4 @@ run_ffn=function(layer_sizes, data){
 
 
 }
-a=run_ffn(c(2,3,4,1),matrix(
-  c(1, 2, 3, 4,
-    2, 3, 4, 5),
-  nrow = 2,
-  byrow = TRUE
-))
-a
+
