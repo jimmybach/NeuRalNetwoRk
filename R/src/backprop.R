@@ -19,24 +19,84 @@ initialize_biases=function(layer_sizes){
   )
 }
 
+initialize_bias_gradients=function(layer_sizes){
+  lapply(
+    seq_len(length(layer_sizes) - 1),
+    function(i) {
+      matrix(rep(0,layer_sizes[i]),ncol=1)
+    }
+  )
+}
 
-for
+initialize_weight_gradients=function(layer_sizes){
+  lapply(
+    seq_len(length(layer_sizes) - 1),
+    function(i) {
+      x=layer_sizes[i]
+      y=layer_sizes[i + 1]
+
+      matrix(rep(0,(y * x)), nrow = y, ncol = x)
+    }
+  )
+}
+
 sigmoid=function(z){
   return(1/(1+exp(-z)))
 }
 
-run_ffn=function(layer_sizes, x){
+sigmoid_prime = function(a){
+  return(a * (1-a))
+}
+
+cost=function(output, y){
+  n=length(y)
+  return((1/(2*n))*sum((output-y)^2))
+}
+
+cost_derivative=function(output, y){
+  n=length(y)
+  return((output-y)/n)
+}
+
+run_backprop=function(layer_sizes, x){
+  n_layers=length(layer_sizes)-1
+
   weights=initialize_weights(layer_sizes)
   biases=initialize_biases(layer_sizes)
   activation=t(x)
-  activations=numeric()
-  zs=numeric()
+  activations=numeric(n_layers)
+  zs=numeric(n_layers)
 
-  for(i in 1:(length(layer_sizes)-1)){
+  bias_gradients=initialize_bias_gradients(layer_sizes)
+  weight_gradients=initialize_weight_gradients(layer_sizes)
+
+  for(i in 1:(n_layers)){
+
     z=weights[[i]]%*%activation + biases[[i]]%*%t(rep(1,ncol(activation)))
-    append(zs, z)
+    zs[i]=z
+
     activation=sigmoid(z)
-    append(activations, activation)
+    activations[i]=activation
+
+   }
+
+  delta=cost_derivative(activations[layer_sizes-1],y)*sigmoid_prime(zs[layer_sizes-1])
+  bias_gradients[[n_layers]]=delta
+  weight_gradients[[n_layers]]=delta %*% t(activations[n_layers-1])
+
+  for(i in (n_layers-1):1){
+    z=zs[z]
+    sp=sigmoid_prime(z)
+    delta=(t(weights[i+1]) %*% delta) * sp
+    bias_gradients[[i]]=delta
+    weight_gradients[[i]]=delta %*% t(activations[i-1])
   }
+
+
+  return(list(weight_gradients,bias_gradients))
+
 }
 
+layer_sizes=c(5,9,4,1)
+bias_gradients=initialize_bias_gradients(layer_sizes)
+bias_gradients[[3]]
