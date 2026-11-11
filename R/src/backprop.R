@@ -20,21 +20,23 @@ initialize_biases=function(layer_sizes){
 }
 
 
-
+for
 sigmoid=function(z){
   return(1/(1+exp(-z)))
 }
 
-run_ffn=function(layer_sizes, data){
+run_ffn=function(layer_sizes, x){
   weights=initialize_weights(layer_sizes)
   biases=initialize_biases(layer_sizes)
-  a=data
+  activation=t(x)
+  activations=numeric()
+  zs=numeric()
+
   for(i in 1:(length(layer_sizes)-1)){
-    a=sigmoid(weights[[i]]%*%a + biases[[i]]%*%t(rep(1,ncol(a))))
-    print(dim(a))
+    z=weights[[i]]%*%activation + biases[[i]]%*%t(rep(1,ncol(activation)))
+    append(zs, z)
+    activation=sigmoid(z)
+    append(activations, activation)
   }
-  return(a)
-
-
 }
 
