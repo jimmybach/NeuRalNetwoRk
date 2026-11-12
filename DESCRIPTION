@@ -1,17 +1,19 @@
-Package: RVAE
+Package: NeuRalNetwoRk
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Feedforward Neural Network Implementation from Scratch
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Jimmy", "Bach",
+      email = "bachjp@umich.edu",
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Description: Given data inputs, NeuRalNetwoRk allows you to train a 
+    FFN with a quadratic cost function and sigmoid activation layers
+    using stochastic gradient descent. It allows for various parameters
+    for the number of epochs, batch size, and learning rate.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Config/roxygen2/version: 8.1.1
