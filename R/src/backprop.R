@@ -57,46 +57,49 @@ cost_derivative=function(output, y){
   n=length(y)
   return((output-y)/n)
 }
-
-run_backprop=function(layer_sizes, x){
+t(activations[[n_layers+1]])-Y
+Y
+run_backprop=function(layer_sizes, x, y){
   n_layers=length(layer_sizes)-1
 
   weights=initialize_weights(layer_sizes)
   biases=initialize_biases(layer_sizes)
   activation=t(x)
-  activations=numeric(n_layers)
-  zs=numeric(n_layers)
+  activations=list(t(x))
+  zs=list()
 
   bias_gradients=initialize_bias_gradients(layer_sizes)
   weight_gradients=initialize_weight_gradients(layer_sizes)
 
   for(i in 1:(n_layers)){
 
+
     z=weights[[i]]%*%activation + biases[[i]]%*%t(rep(1,ncol(activation)))
-    zs[i]=z
+    zs[[i]]=z
 
     activation=sigmoid(z)
-    activations[i]=activation
+    activations[[i+1]]=activation
+    print(activation)
 
-   }
+  }
 
-  delta=cost_derivative(activations[layer_sizes-1],y)*sigmoid_prime(zs[layer_sizes-1])
+
+  delta=cost_derivative(activations[[n_layers+1]],t(y))*sigmoid_prime(zs[[n_layers]])
   bias_gradients[[n_layers]]=delta
-  weight_gradients[[n_layers]]=delta %*% t(activations[n_layers-1])
+  weight_gradients[[n_layers]]=delta %*% t(activations[[n_layers]])
 
   for(i in (n_layers-1):1){
-    z=zs[z]
+    z=zs[[i]]
     sp=sigmoid_prime(z)
-    delta=(t(weights[i+1]) %*% delta) * sp
+    delta=(t(weights[[i+1]]) %*% delta) * sp
     bias_gradients[[i]]=delta
-    weight_gradients[[i]]=delta %*% t(activations[i-1])
+    print(dim(delta))
+    print(dim(activations[[i]]))
+    weight_gradients[[i]]=delta %*% t(activations[[i]])
+
   }
 
 
   return(list(weight_gradients,bias_gradients))
 
 }
-
-layer_sizes=c(5,9,4,1)
-bias_gradients=initialize_bias_gradients(layer_sizes)
-bias_gradients[[3]]
