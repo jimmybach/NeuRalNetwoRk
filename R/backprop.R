@@ -26,8 +26,7 @@ run_backprop=function(layer_sizes, x, y, weights=NULL, biases=NULL){
 
   }
 
-
-  delta=cost_derivative(activations[[n_layers+1]],t(y))*sigmoid_prime(activations[[n_layers+1]])
+  delta=cost_derivative(activations[[n_layers+1]],y)*sigmoid_prime(activations[[n_layers+1]])
   bias_gradients[[n_layers]]=matrix(rowSums(delta),ncol=1)
   weight_gradients[[n_layers]]=delta %*% t(activations[[n_layers]])
   for(i in (n_layers-1):1){
