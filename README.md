@@ -1,10 +1,10 @@
-# YourPackageName
+# NeuRalNetwoRk
 
 **A feedforward neural network implementation built from scratch in R.**
 
 ## Overview
 
-`YourPackageName` is an R package for building and training fully connected feedforward neural networks using base R matrix operations.
+`NeuRalNetwoRk` is an R package for building and training fully connected feedforward neural networks using base R matrix operations.
 
 The package implements the fundamental components of neural network training, including forward propagation, backpropagation, gradient calculation, and mini-batch stochastic gradient descent.
 
