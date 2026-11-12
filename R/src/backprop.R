@@ -1,63 +1,3 @@
-initialize_weights=function(layer_sizes){
-  lapply(
-    seq_len(length(layer_sizes) - 1),
-    function(i) {
-      x=layer_sizes[i]
-      y=layer_sizes[i + 1]
-
-      matrix(rnorm(y * x), nrow = y, ncol = x)
-    }
-  )
-}
-
-initialize_biases=function(layer_sizes){
-  lapply(
-    seq_len(length(layer_sizes)-1),
-    function(i) {
-      matrix(rnorm(layer_sizes[i+1]),ncol=1)
-    }
-  )
-}
-
-initialize_bias_gradients=function(layer_sizes){
-  lapply(
-    seq_len(length(layer_sizes)-1),
-    function(i) {
-      matrix(rep(0,layer_sizes[i+1]),ncol=1)
-    }
-  )
-}
-biases
-initialize_weight_gradients=function(layer_sizes){
-  lapply(
-    seq_len(length(layer_sizes) - 1),
-    function(i) {
-      x=layer_sizes[i]
-      y=layer_sizes[i + 1]
-
-      matrix(rep(0,(y * x)), nrow = y, ncol = x)
-    }
-  )
-}
-
-sigmoid=function(z){
-  return(1/(1+exp(-z)))
-}
-
-sigmoid_prime = function(a){
-  return(a * (1-a))
-}
-
-cost=function(output, y){
-  n=length(y)
-  return((1/(2*n))*sum((output-y)^2))
-}
-
-cost_derivative=function(output, y){
-  n=length(y)
-  return((output-y)/n)
-}
-
 run_backprop=function(layer_sizes, x, y, weights=NULL, biases=NULL){
   n_layers=length(layer_sizes)-1
 
@@ -100,16 +40,6 @@ run_backprop=function(layer_sizes, x, y, weights=NULL, biases=NULL){
 
   return(list(weight_gradients,bias_gradients))
 
-}
-
-feedforward=function(X, weights, biases){
-  a=t(X)
-  for(i in 1:length(weights)){
-    print(weights[[i]]%*%a)
-    print(biases[[i]])
-    a=sigmoid(weights[[i]]%*%a + biases[[i]]%*%t(rep(1,ncol(a))))
-  }
-  return(a)
 }
 
 
