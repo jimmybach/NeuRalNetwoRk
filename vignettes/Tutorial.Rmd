@@ -1,0 +1,99 @@
+---
+title: "Tutorial"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(NeuRalNetwoRk)
+install.packages("bench")
+library("bench")
+library(nnet)
+install.packages("rchallenge")
+data("german", package = "rchallenge")
+german
+```
+
+```{r network_initialization}
+indices=seq_len(nrow(german))
+
+train=sample(indices, 0.8*nrow(german))
+test=indices[-train]
+
+X_train=as.matrix(german[train,c("duration", "amount", "age")])
+X_test=as.matrix(german[test,c("duration", "amount", "age")])
+
+Y_train=as.matrix(ifelse(german[train, "credit_risk"]=="good",1,0))
+Y_test=as.matrix(ifelse(german[test, "credit_risk"]=="good",1,0))
+
+
+
+set.seed(123)
+
+layer_sizes <- c(ncol(X_train), 16, 1)
+
+benchmark_train <- function() {
+  set.seed(123)
+
+  network <- initialize_network(layer_sizes)
+
+  train(
+    network,
+    X_train,
+    Y_train,
+    epochs = 500,
+    mini_batch_size = 32,
+    learning_rate = 0.01
+  )
+}
+
+benchmark_train()
+benchmark_nnet <- function() {
+  set.seed(123)
+
+  nnet::nnet(
+    x = X_train,
+    y = Y_train,
+    size = 16,
+    linout = FALSE,
+    entropy = FALSE,
+    decay = 0,
+    maxit = 500,
+    trace = FALSE,
+    MaxNWts = 10000
+  )
+}
+results <- bench::mark(
+  NeuRalNetwoRk = benchmark_train(),
+  nnet=benchmark_nnet(),
+  iterations = 3,
+  check = FALSE,
+  memory = TRUE
+)
+
+?bench::mark
+print(results)
+
+profvis::profvis({ benchmark_train() })
+```
+
+```{r train_network}
+trained_network=train(network, X, Y, mini_batch_size = 32, learning_rate=0.01)
+```
+
+```{r predictions}
+raw_predictions=feedforward(trained_network, X)
+binary_predictions=ifelse(raw_predictions>=0.5,1,0)
+print(sum(binary_predictions==Y)/length(Y))
+```
+

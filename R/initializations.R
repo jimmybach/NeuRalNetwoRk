@@ -40,6 +40,27 @@ initialize_weight_gradients=function(layer_sizes){
   )
 }
 
+#'initialize_network
+#'
+#'Initializes a feedforward neural network using a Gaussian distribution for both weights and biases.
+#'@param layer_sizes A vector of integers specifying the number of neurons within each layer.
+#'@param weights Optional list of weight matrices. If NULL, weights
+#'   are randomly initialized.
+#'@param biases Optional list of bias vectors. If NULL, biases
+#'   are randomly initialized.
+#'@return A list of with the layer_sizes, a list of random weights,
+#'   and a list of random biases for each neuron of each layer.
+#'@examples
+#'data(mtcars)
+#'
+#' X=scale(mtcars[, c("mpg", "cyl", "hp")])
+#' Y=matrix(mtcars$am, ncol = 1)
+#'
+#' layer_sizes <- c(3, 9, 4, 1)
+#'
+#' set.seed(123)
+#' network <- initialize_network(layer_sizes)
+#'@export
 initialize_network=function(layer_sizes, weights=NULL, biases=NULL){
   if(is.null(weights)){
     weights=initialize_weights(layer_sizes)
