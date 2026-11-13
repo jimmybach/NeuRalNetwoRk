@@ -1,3 +1,7 @@
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/jimmybach/NeuRalNetwoRk/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jimmybach/NeuRalNetwoRk/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 # NeuRalNetwoRk
 
 **A feedforward neural network implementation built from scratch in R.**
