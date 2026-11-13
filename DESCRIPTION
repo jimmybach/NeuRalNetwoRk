@@ -20,4 +20,7 @@ Config/roxygen2/version: 8.1.1
 Suggests: 
     knitr,
     rmarkdown
+    bench,
+    nnet,
+    rchallenge
 VignetteBuilder: knitr
