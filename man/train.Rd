@@ -30,8 +30,6 @@ Tracks loss history and returns network with updated weights and biases.
 X=mtcars[, c("mpg","cyl", "hp")]
 Y=mtcars[, "am"]
 layer_sizes=c(3,9,4,1)
-network=list(layer_sizes=layer_sizes,
-            weights=initialize_weights(layer_sizes),
-            biases=initialize_biases(layer_sizes))
+network=initialize_network(layer_sizes)
 train(network, X, Y, epochs=5000, mini_batch_size=6, learning_rate=0.01)
 }
