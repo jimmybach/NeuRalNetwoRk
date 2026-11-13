@@ -21,8 +21,6 @@ Makes a forward pass to a network of weights and biases using data.
 X=mtcars[, c("mpg","cyl", "hp")]
 Y=mtcars[, "am"]
 layer_sizes=c(3,9,4,1)
-network=list(layer_sizes=layer_sizes,
-            weights=initialize_weights(layer_sizes),
-            biases=initialize_biases(layer_sizes))
+network=initialize_network(layer_sizes)
 feedforward(network, X)
 }
