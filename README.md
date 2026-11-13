@@ -172,7 +172,7 @@ Y <- matrix(mtcars$am, ncol = 1)
 network <- initialize_network(c(3, 9, 4, 1))
 
 # Train the network
-network <- train_network(
+network <- train(
   network,
   X,
   Y,
@@ -183,8 +183,7 @@ network <- train_network(
 
 # Generate predictions
 predictions <- forward(
-  network$weights,
-  network$biases,
+  network,
   X
 )
 
