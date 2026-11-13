@@ -19,7 +19,7 @@ LazyData: true
 Config/roxygen2/version: 8.1.1
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
     bench,
     nnet,
     rchallenge
