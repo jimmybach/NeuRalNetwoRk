@@ -19,6 +19,7 @@ initialize_biases=function(layer_sizes){
   )
 }
 
+
 initialize_bias_gradients=function(layer_sizes){
   lapply(
     seq_len(length(layer_sizes)-1),

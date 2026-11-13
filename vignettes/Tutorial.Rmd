@@ -2,7 +2,7 @@
 title: "Tutorial"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tutorial}
+  %\VignetteIndexEntry{Tutorial}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,15 +16,13 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(NeuRalNetwoRk)
-install.packages("bench")
 library("bench")
-library(nnet)
-install.packages("rchallenge")
+library("nnet")
+library("rchallenge")
 data("german", package = "rchallenge")
-german
 ```
 
-```{r network_initialization}
+```{r benchmarking, results=FALSE}
 indices=seq_len(nrow(german))
 
 train=sample(indices, 0.8*nrow(german))
@@ -73,6 +71,7 @@ benchmark_nnet <- function() {
     MaxNWts = 10000
   )
 }
+
 results <- bench::mark(
   NeuRalNetwoRk = benchmark_train(),
   nnet=benchmark_nnet(),
@@ -81,19 +80,21 @@ results <- bench::mark(
   memory = TRUE
 )
 
-?bench::mark
 print(results)
-
-profvis::profvis({ benchmark_train() })
 ```
 
+To initialize and train your network: 
 ```{r train_network}
-trained_network=train(network, X, Y, mini_batch_size = 32, learning_rate=0.01)
+
+network=initialize_network(layer_sizes)
+trained_network=train(network, X_train, Y_train, mini_batch_size = 32, learning_rate=0.01)
+
 ```
 
+To use your trained network for prediction:
 ```{r predictions}
-raw_predictions=feedforward(trained_network, X)
+raw_predictions=t(feedforward(trained_network, X_test))
 binary_predictions=ifelse(raw_predictions>=0.5,1,0)
-print(sum(binary_predictions==Y)/length(Y))
+print(sum(binary_predictions==Y_test)/length(Y_test))
 ```
 

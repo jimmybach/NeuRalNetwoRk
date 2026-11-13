@@ -31,8 +31,8 @@ sgd=function(network, X,y,epochs, mini_batch_size, learning_rate){
     predictions=feedforward(list(layer_sizes=layer_sizes,
                                  weights=weights,
                                  biases=biases), X)
-    print(predi)
-    loss_history[epoch]=cost(predictions, y)
+
+    loss_history[epoch]=cost(t(predictions), y)
   }
   return(list(weights=weights,
               biases=biases,
