@@ -9,6 +9,7 @@
 #'@param epochs The number of training epochs during stochastic gradient descent.
 #'@param mini_batch_size The size of the batches during stochastic gradient descent.
 #'@param learning_rate The learning rate during stochastic gradient descent.
+#'@param verbose An optional parameter for printing the loss history during gradient descent
 #'@return A trained network with updated weights and biases.
 #'@examples
 #'X=mtcars[, c("mpg","cyl", "hp")]

@@ -49,10 +49,6 @@ initialize_weight_gradients=function(layer_sizes){
 #'
 #'Initializes a feedforward neural network using a Gaussian distribution for both weights and biases.
 #'@param layer_sizes A vector of integers specifying the number of neurons within each layer.
-#'@param weights Optional list of weight matrices. If NULL, weights
-#'   are randomly initialized.
-#'@param biases Optional list of bias vectors. If NULL, biases
-#'   are randomly initialized.
 #'@return A list of with the layer_sizes, a list of random weights,
 #'   and a list of random biases for each neuron of each layer.
 #'@examples
