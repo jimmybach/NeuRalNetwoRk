@@ -12,7 +12,6 @@ initialize_weights=function(layer_sizes){
   )
 }
 
-
 initialize_biases=function(layer_sizes){
   lapply(
     seq_len(length(layer_sizes)-1),
