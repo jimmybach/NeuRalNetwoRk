@@ -26,6 +26,8 @@ train(
 \item{mini_batch_size}{The size of the batches during stochastic gradient descent.}
 
 \item{learning_rate}{The learning rate during stochastic gradient descent.}
+
+\item{verbose}{An optional parameter for printing the loss history during gradient descent}
 }
 \value{
 A trained network with updated weights and biases.
@@ -39,5 +41,5 @@ X=mtcars[, c("mpg","cyl", "hp")]
 Y=mtcars[, "am"]
 layer_sizes=c(3,9,4,1)
 network=initialize_network(layer_sizes)
-train(network, X, Y, epochs=5000, mini_batch_size=6, learning_rate=0.01)
+train(network, X, Y, epochs=5000, mini_batch_size=6, learning_rate=0.01, verbose=TRUE)
 }

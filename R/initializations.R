@@ -7,7 +7,7 @@ initialize_weights=function(layer_sizes){
 
       #The number of rows is equal to the layer size of the next dimension
       #The number of columns is equal to the layer size of the current dimension
-      matrix(rnorm(y * x), nrow = y, ncol = x)
+      matrix(stats::rnorm(y * x), nrow = y, ncol = x)
     }
   )
 }
@@ -18,7 +18,7 @@ initialize_biases=function(layer_sizes){
     seq_len(length(layer_sizes)-1),
     function(i) {
       #The length of the bias vector is equal to the size of the next layer
-      matrix(rnorm(layer_sizes[i+1]),ncol=1)
+      matrix(stats::rnorm(layer_sizes[i+1]),ncol=1)
     }
   )
 }

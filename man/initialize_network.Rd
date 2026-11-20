@@ -8,12 +8,6 @@ initialize_network(layer_sizes)
 }
 \arguments{
 \item{layer_sizes}{A vector of integers specifying the number of neurons within each layer.}
-
-\item{weights}{Optional list of weight matrices. If NULL, weights
-are randomly initialized.}
-
-\item{biases}{Optional list of bias vectors. If NULL, biases
-are randomly initialized.}
 }
 \value{
 A list of with the layer_sizes, a list of random weights,

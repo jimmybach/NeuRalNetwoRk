@@ -16,7 +16,7 @@
 #'Y=mtcars[, "am"]
 #'layer_sizes=c(3,9,4,1)
 #'network=initialize_network(layer_sizes)
-#'train(network, X, Y, epochs=5000, mini_batch_size=6, learning_rate=0.01)
+#'train(network, X, Y, epochs=5000, mini_batch_size=6, learning_rate=0.01, verbose=TRUE)
 #'@export
 train=function(network, X, Y, epochs=5000, mini_batch_size=32, learning_rate=0.01, verbose=TRUE){
   n <- nrow(X)
@@ -25,7 +25,7 @@ train=function(network, X, Y, epochs=5000, mini_batch_size=32, learning_rate=0.0
   stopifnot(
     n == nrow(Y),
     ncol(X) == network$layer_sizes[1],
-    ncol(Y) == tail(network$layer_sizes, 1),
+    ncol(Y) == utils::tail(network$layer_sizes, 1),
     mini_batch_size >= 1,
     mini_batch_size <= n,
     epochs>=1,
