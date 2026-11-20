@@ -39,7 +39,6 @@ initialize_weight_gradients=function(layer_sizes){
     function(i) {
       x=layer_sizes[i]
       y=layer_sizes[i + 1]
-
       matrix(rep(0,(y * x)), nrow = y, ncol = x)
     }
   )
