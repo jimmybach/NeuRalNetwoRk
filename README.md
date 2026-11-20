@@ -1,5 +1,6 @@
 <!-- badges: start -->
   [![R-CMD-check](https://github.com/jimmybach/NeuRalNetwoRk/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jimmybach/NeuRalNetwoRk/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/jimmybach/NeuRalNetwoRk/graph/badge.svg)](https://app.codecov.io/gh/jimmybach/NeuRalNetwoRk)
 <!-- badges: end -->
 
 # NeuRalNetwoRk
