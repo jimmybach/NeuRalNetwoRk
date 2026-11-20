@@ -62,14 +62,16 @@ initialize_weight_gradients=function(layer_sizes){
 #' set.seed(123)
 #' network <- initialize_network(layer_sizes)
 #'@export
-initialize_network=function(layer_sizes, weights=NULL, biases=NULL){
-  if(is.null(weights)){
-    weights=initialize_weights(layer_sizes)
-  }
+initialize_network=function(layer_sizes){
 
-  if(is.null(biases)){
-    biases=initialize_biases(layer_sizes)
-  }
+  stopifnot(
+    all(layer_sizes>=1),
+    all(layer_sizes == floor(layer_sizes)),
+    length(layer_sizes)>=2
+  )
+
+  weights=initialize_weights(layer_sizes)
+  biases=initialize_biases(layer_sizes)
 
   return(list(layer_sizes=layer_sizes,
               weights=weights,

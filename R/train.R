@@ -17,7 +17,7 @@
 #'network=initialize_network(layer_sizes)
 #'train(network, X, Y, epochs=5000, mini_batch_size=6, learning_rate=0.01)
 #'@export
-train=function(network, X, Y, epochs=5000, mini_batch_size=32, learning_rate=0.01){
+train=function(network, X, Y, epochs=5000, mini_batch_size=32, learning_rate=0.01, verbose=TRUE){
   n <- nrow(X)
 
   # Validate dimensions
@@ -26,7 +26,9 @@ train=function(network, X, Y, epochs=5000, mini_batch_size=32, learning_rate=0.0
     ncol(X) == network$layer_sizes[1],
     ncol(Y) == tail(network$layer_sizes, 1),
     mini_batch_size >= 1,
-    mini_batch_size <= n
+    mini_batch_size <= n,
+    epochs>=1,
+    learning_rate>=0
   )
 
   # Retrieve parameters
@@ -34,15 +36,13 @@ train=function(network, X, Y, epochs=5000, mini_batch_size=32, learning_rate=0.0
   biases <- network$biases
   layer_sizes=network$layer_sizes
 
-  trained=sgd(network, X, Y, epochs, mini_batch_size, learning_rate)
+  trained=sgd(network, X, Y, epochs, mini_batch_size, learning_rate, verbose=verbose)
 
 
   trained_weights=trained$weights
   trained_biases=trained$biases
   loss_history=trained$loss_history
 
-  print(loss_history[1])
-  print(loss_history[epochs])
 
   return(list(layer_sizes=network$layer_sizes,
               weights=trained_weights,

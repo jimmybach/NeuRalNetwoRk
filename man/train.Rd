@@ -4,7 +4,15 @@
 \alias{train}
 \title{train}
 \usage{
-train(network, X, Y, epochs = 5000, mini_batch_size = 32, learning_rate = 0.01)
+train(
+  network,
+  X,
+  Y,
+  epochs = 5000,
+  mini_batch_size = 32,
+  learning_rate = 0.01,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{network}{A list with attributes `layer_sizes`, `weights`, and `biases`.}

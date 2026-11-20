@@ -1,4 +1,4 @@
-sgd=function(network, X,y,epochs, mini_batch_size, learning_rate){
+sgd=function(network, X,y,epochs, mini_batch_size, learning_rate, verbose=TRUE){
   n=nrow(X)
   loss_history=numeric(epochs)
 
@@ -32,7 +32,15 @@ sgd=function(network, X,y,epochs, mini_batch_size, learning_rate){
                                  weights=weights,
                                  biases=biases), X)
 
-    loss_history[epoch]=cost(t(predictions), y)
+    loss=cost(t(predictions), y)
+
+    if(verbose){
+      cat(sprintf("Epoch %s loss: %.4f\n", epoch, loss))
+    }
+
+    loss_history[epoch]=loss
+
+
   }
   return(list(weights=weights,
               biases=biases,

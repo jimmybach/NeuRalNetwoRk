@@ -4,7 +4,7 @@
 \alias{initialize_network}
 \title{initialize_network}
 \usage{
-initialize_network(layer_sizes, weights = NULL, biases = NULL)
+initialize_network(layer_sizes)
 }
 \arguments{
 \item{layer_sizes}{A vector of integers specifying the number of neurons within each layer.}
