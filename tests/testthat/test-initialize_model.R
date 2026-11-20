@@ -8,12 +8,15 @@ test_that("initialization works", {
   bias_grads=initialize_bias_gradients(layer_sizes)
 
   for(i in 1:(length(layer_sizes)-1)){
+    #Expect network weights and biases to be set up as a list of matrices
+    #With an FFN architecture
     expect_equal(dim(network$weights[[i]]), c(layer_sizes[i+1],layer_sizes[i]))
     expect_equal(dim(network$biases[[i]]), c(layer_sizes[i+1], 1))
 
     expect_equal(dim(weight_grads[[i]]), c(layer_sizes[i+1],layer_sizes[i]))
     expect_equal(dim(bias_grads[[i]]), c(layer_sizes[i+1], 1))
 
+    #Expect gradients to be initialized to 0
     expect_true(all(weight_grads[[i]]==0))
     expect_true(all(bias_grads[[i]]==0))
 

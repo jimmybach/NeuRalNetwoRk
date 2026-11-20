@@ -7,6 +7,8 @@ test_that("results are reproducible with random seed", {
   trained_network=train(network, X, Y, epochs=500, mini_batch_size=6, learning_rate=0.01, verbose=FALSE)
   predictions=feedforward(trained_network, X)
 
+  #Using a random seed of 123, we would expect a quadratic cost value of 0.119
+  #on this data with these parameters
   expect_equal(cost(t(predictions), Y),0.1190849, tolerance=1e-6)
 
 })

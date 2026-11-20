@@ -12,11 +12,14 @@
 #'feedforward(network, X)
 #'@export
 feedforward=function(network, X){
+
+  #Transpose the input data
   a=t(X)
   weights=network$weights
   biases=network$biases
 
   for(i in 1:length(weights)){
+    #Push W_i * t(x) + B_i through the sigmoid function
     a=sigmoid(weights[[i]]%*%a + biases[[i]]%*%t(rep(1,ncol(a))))
   }
   return(a)
